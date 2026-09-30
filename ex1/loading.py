@@ -1,12 +1,20 @@
 import sys
-import numpy as np
-import numpy.typing as npt
-import pandas as pd
-import matplotlib.pyplot as plt
 import importlib.metadata
+try:
+    import numpy as np
+    import numpy.typing as npt
+    import pandas as pd
+    import matplotlib.pyplot as plt
+except ModuleNotFoundError:
+    print("Some package is missing")
 
 
-def check_dependencies() -> None:
+def show_instructions() -> None:
+    print("Use 'pip install -r requirements.txt'")
+    sys.exit()
+
+
+def check_pandas() -> None:
     try:
         version = importlib.metadata.version("pandas")
         if version == "2.1.0":
@@ -15,6 +23,10 @@ def check_dependencies() -> None:
             print(f"[KO] pandas version: {version}. Needed '2.1.0'")
     except importlib.metadata.PackageNotFoundError:
         print("[KO] pandas package not found")
+        show_instructions()
+
+
+def check_numpy() -> None:
     try:
         version = importlib.metadata.version("numpy")
         if version == "1.25.0":
@@ -22,7 +34,11 @@ def check_dependencies() -> None:
         else:
             print(f"[KO] numpy version: {version}. Needed '1.25.0'")
     except importlib.metadata.PackageNotFoundError:
-            print("[KO] numpy package not found")
+        print("[KO] numpy package not found")
+        show_instructions()
+
+
+def check_matplotlib() -> None:
     try:
         version = importlib.metadata.version("matplotlib")
         if version == "3.7.2":
@@ -30,7 +46,15 @@ def check_dependencies() -> None:
         else:
             print(f"[KO] matplotlib version: {version}. Needed '3.7.2'")
     except importlib.metadata.PackageNotFoundError:
-        print("[KO] numpy package not found")
+        print("[KO] matplotlib package not found")
+        show_instructions()
+
+def check_dependencies() -> None:
+    check_pandas()
+    check_numpy()
+    check_matplotlib()
+
+
 
 
 def main() -> None:
