@@ -10,6 +10,7 @@ API_KEY = os.getenv("API_KEY")
 LOG_LEVEL = os.getenv("LOG_LEVEL")
 ZION_ENDPOINT = os.getenv("ZION_ENDPOINT")
 
+
 def load_config() -> None:
 
     req_conf: list[str] = [
@@ -22,7 +23,7 @@ def load_config() -> None:
     miss_conf: list[str] = [var for var in req_conf if var not in os.environ]
     if miss_conf:
         print(f"Error, missing configuration: {', '.join(miss_conf)}",
-               file=sys.stderr)
+              file=sys.stderr)
         sys.exit(1)
     else:
         print("Configuration loaded:")
@@ -42,6 +43,7 @@ def show_prod() -> None:
     print("API Access: Authenticated")
     print("Log level: INFO")
     print("Zion Network: Online")
+
 
 def main() -> None:
     print("\nORACLE STATUS: Reading the Matrix...\n")

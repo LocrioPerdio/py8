@@ -51,6 +51,7 @@ def check_matplotlib() -> None:
         print("[KO] matplotlib package not found")
         show_instructions()
 
+
 def check_dependencies() -> None:
     check_pandas()
     check_numpy()
